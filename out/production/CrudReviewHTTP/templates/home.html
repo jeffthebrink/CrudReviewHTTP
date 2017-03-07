@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Person List Page</title>
+</head>
+<body bgcolor="#00bfff">
+<h1>Welcome to the Person List Page, {{name}}!</h1>
+
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+
+<h3>Create Person Entry: </h3>
+<form action="/createEntry" method="post">
+    <input type="text" placeholder="Name" name="name" width="100"/>
+    <input type="text" placeholder="Age" name="age" width="100"/>
+    <input type="text" placeholder="City" name="city" width="100"/>
+    <input type="text" placeholder="Country" name="country" width="100"/>
+    <button type="submit">Submit</button>
+</form>
+
+<h3>Current Person List: </h3>
+
+<ol>
+
+    {{#personArrayList}}
+    <li>
+
+        <a href="/edit?id={{id}}"><button>Edit</button></a> <a href="/delete?id={{id}}"><button type="submit">Delete</button></a>
+
+        Name: {{name}},
+        Age: {{age}},
+        City: {{city}},
+        Country: {{country}}
+    </li>
+    {{/personArrayList}}
+
+</ol>
+{{^personArrayList}}
+<h4>No entries present yet...</h4>
+{{/personArrayList}}
+
+</body>
+</html>

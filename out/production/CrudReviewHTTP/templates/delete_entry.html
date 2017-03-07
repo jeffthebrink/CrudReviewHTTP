@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Confirm</title>
+</head>
+<body bgcolor="#00bfff">
+<h2>Entry to Delete:</h2>
+{{#person}}
+{{name}} - {{age}} - {{city}} - {{country}}
+
+<h2>Press Submit to Confirm Delete:</h2>
+<form action="/deleteEntry?id={{id}}" method="post">
+    <input type="hidden" value="{{id}}" name="id" />
+    <button type="submit">Submit</button>
+</form>
+{{/person}}
+
+<h2>Press Back to Cancel Delete:</h2>
+<a href="/"> <button type="button">Back</button></a>
+
+</body>
+</html>

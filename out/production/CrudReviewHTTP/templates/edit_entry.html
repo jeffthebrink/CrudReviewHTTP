@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Entry</title>
+</head>
+<body bgcolor="#00bfff">
+
+<h2>Edit an entry: </h2>
+
+<h4>Original Entry:</h4>
+{{#person}}
+{{name}} - {{age}} - {{city}} - {{country}}
+
+
+<hr>
+<h4>New Entry:</h4>
+
+<form action="/editEntry" method="post">
+    <input type="text" placeholder="Name" name="name" width="100"/>
+    <input type="text" placeholder="Age" name="age" width="100"/>
+    <input type="text" placeholder="City" name="city" width="100"/>
+    <input type="text" placeholder="Country" name="country" width="100"/>
+    <input type="hidden" value="{{id}}" name="id" />
+    <button type="submit">Submit</button>
+</form>
+{{/person}}
+</body>
+</html>
