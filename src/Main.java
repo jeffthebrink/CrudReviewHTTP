@@ -3,6 +3,7 @@ import spark.Session;
 import spark.Spark;
 import spark.template.mustache.MustacheTemplateEngine;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,6 +11,9 @@ public class Main {
 
     static HashMap<String, User> userHashMap = new HashMap<>();
     static ArrayList<Person> personArrayList = new ArrayList<>();
+//    static HashMap<Integer, Person> personHashMap = new HashMap<>();
+
+    static int personCounter = 0;
 
     public static void main(String[] args) {
 
@@ -27,6 +31,7 @@ public class Main {
                         return new ModelAndView(m, "login.html");
                     } else {
                         m.put("name", user.name);
+//                        m.put("personHashMap", personHashMap);
                         m.put("personArrayList", personArrayList);
                         return new ModelAndView(m, "home.html");
                     }
@@ -61,6 +66,7 @@ public class Main {
             int id = personArrayList.size();
             if (!name.isEmpty()) {
                 Person person = new Person(name, age, city, country, id);
+                personCounter++;
                 personArrayList.add(person);
             }
             response.redirect("/");
@@ -109,9 +115,16 @@ public class Main {
 
         Spark.post("/deleteEntry", (request, response) -> {
             int id = Integer.parseInt(request.queryParams("id"));
-            personArrayList.remove((id));
+            int tempId = personArrayList.get(id).id;
+            personArrayList.remove(id);
+            for (Person person : personArrayList) {
+                if (person.id > tempId) {
+                    person.id = (person.id-1);
+                }
+            }
             response.redirect("/");
             return "";
         });
+
     }
 }
